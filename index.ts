@@ -3,7 +3,7 @@
  */
 interface ObserverHandlers<T> {
   next?: (value: T) => void;
-  error?: (error: any) => void;
+  error?: (error: unknown) => void;
   complete?: () => void;
 }
 
@@ -26,7 +26,7 @@ class Observer<T> {
     }
   }
 
-  error(error: any): void {
+  error(error: unknown): void {
     if (!this.isUnsubscribed) {
       if (this.handlers.error) {
         this.handlers.error(error);
@@ -118,7 +118,7 @@ interface User {
 /**
  * Interface representing a HTTP Request, parameterized by its payload/body type.
  */
-interface HttpRequest<TBody = any> {
+interface HttpRequest<TBody = unknown> {
   method: HttpMethod;
   host: string;
   path: string;
@@ -176,7 +176,7 @@ const handleRequest = (request: HttpRequest<User>): RequestResponse => {
 /**
  * Request error handler.
  */
-const handleError = (error: any): RequestResponse => {
+const handleError = (error: unknown): RequestResponse => {
   // handling of error
   return { status: HTTP_STATUS_INTERNAL_SERVER_ERROR };
 };
